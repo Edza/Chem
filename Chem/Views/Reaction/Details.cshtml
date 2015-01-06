@@ -1,0 +1,22 @@
+﻿@model Chem.Models.Reaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Reaction</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Desc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Desc)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
