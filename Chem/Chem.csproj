@@ -187,6 +187,7 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ReactionController.cs" />
     <Compile Include="Controllers\ReagentController.cs" />
+    <Compile Include="Controllers\Utility\ReactionUtility.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -292,6 +293,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\reagentList.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -333,8 +335,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\HelloWorld\Index.cshtml" />
-    <Content Include="Views\HelloWorld\Welcome.cshtml" />
     <Content Include="Views\Reagent\Index.cshtml" />
     <Content Include="Views\Reagent\Details.cshtml" />
     <Content Include="Views\Reagent\Create.cshtml" />

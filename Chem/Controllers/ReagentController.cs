@@ -22,6 +22,13 @@ namespace Chem.Controllers
         }
 
         //
+        // GET: /Reagent/List
+        public ActionResult List()
+        {
+            return Json(db.Reagents.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        //
         // GET: /Reagent/Details/5
 
         public ActionResult Details(int id = 0)

@@ -20,6 +20,16 @@
             @Html.EditorFor(model => model.Desc)
             @Html.ValidationMessageFor(model => model.Desc)
         </div>
+        <div>
+            <select id="reagentsSelct">
+                <option>Ielādejam!</option>
+            </select>
+        </div>
+        <div class="editor-field">
+            
+            Zemāk ar enter atdali reaģentu ID numurus šai reakcijai!<br/>
+            <textarea name="reagents"></textarea>
+        </div>
 
         <p>
             <input type="submit" value="Create" />
@@ -34,3 +44,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="~/Scripts/reagentList.js" type="text/javascript"></script>

@@ -9,7 +9,7 @@ using Chem.Models;
 
 namespace Chem.Controllers
 {
-    public class ReactionController : Controller
+    public partial class ReactionController : Controller
     {
         private MovieDBContext db = new MovieDBContext();
 
@@ -47,17 +47,23 @@ namespace Chem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Reaction reaction)
+        public ActionResult Create(FormCollection formCollection, Reaction reaction)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            if(true)
             {
+                string reagentsRaw = formCollection["reagents"];
+                List<int> reagentIds = ParseReagentInput(reagentsRaw);
+                List<Reagent> reagents = GetReagentsByIds(reagentIds);
+                reaction.Reagents = reagents;
+
                 db.Reactions.Add(reaction);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(reaction);
-        }
+        } 
 
         //
         // GET: /Reaction/Edit/5
