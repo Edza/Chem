@@ -21,14 +21,16 @@
             @Html.ValidationMessageFor(model => model.Desc)
         </div>
         <div>
-            <select id="reagentsSelct">
+            <select id="reagentsSelect">
                 <option>Ielādejam!</option>
             </select>
+            <div id="addReagent">Pievienot sarakstam</div>
         </div>
         <div class="editor-field">
             
             Zemāk ar enter atdali reaģentu ID numurus šai reakcijai!<br/>
-            <textarea name="reagents"></textarea>
+            <div id="reagentsDisplayNames"></div>
+            <input type="hidden" id="reagents" name="reagents"/>
         </div>
 
         <p>
