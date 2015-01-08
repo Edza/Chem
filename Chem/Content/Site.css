@@ -754,3 +754,17 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.imAMotherfingButton {
+    border:1px solid darkgray;
+    background-color:lightgray;
+    width:120px;
+    padding:2px;
+    margin:2px;
+    display:inline-block;
+}
+
+.myBigFatSelect {
+    width:200px;
+    padding:2px;
+}

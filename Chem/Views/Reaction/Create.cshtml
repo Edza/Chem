@@ -20,15 +20,17 @@
             @Html.EditorFor(model => model.Desc)
             @Html.ValidationMessageFor(model => model.Desc)
         </div>
+        <div class="editor-label">
+            <label for="Reagents">Reagents</label>
+        </div>
         <div>
-            <select id="reagentsSelect">
-                <option>Ielādejam!</option>
+            <select class="myBigFatSelect" id="reagentsSelect">
+                <option>Ielādejam! Neko nespied!</option>
             </select>
-            <div id="addReagent">Pievienot sarakstam</div>
+            <div id="addReagent" class="imAMotherfingButton">Pievienot sarakstam</div>
+            <div id="startOverIGiveUp" class="imAMotherfingButton">Sākt no jauna</div>
         </div>
         <div class="editor-field">
-            
-            Zemāk ar enter atdali reaģentu ID numurus šai reakcijai!<br/>
             <div id="reagentsDisplayNames"></div>
             <input type="hidden" id="reagents" name="reagents"/>
         </div>

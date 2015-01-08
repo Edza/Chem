@@ -9,6 +9,8 @@ using Chem.Models;
 
 namespace Chem.Controllers
 {
+    
+
     public partial class ReactionController : Controller
     {
         private MovieDBContext db = new MovieDBContext();
@@ -49,8 +51,7 @@ namespace Chem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(FormCollection formCollection, Reaction reaction)
         {
-            //if (ModelState.IsValid)
-            if(true)
+            if (ModelState.IsValid)
             {
                 string reagentsRaw = formCollection["reagents"];
                 List<int> reagentIds = ParseReagentInput(reagentsRaw);

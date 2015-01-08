@@ -11,7 +11,7 @@ namespace Chem.Controllers
     {
         private List<int> ParseReagentInput(string reagents)
         {
-            return reagents.Split('\n').Select(x => int.Parse(x.Trim())).ToList();
+            return reagents.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x.Trim())).ToList();
         }
 
         private List<Reagent> GetReagentsByIds(List<int> reagentIds)

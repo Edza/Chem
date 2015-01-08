@@ -187,6 +187,7 @@
     <Compile Include="Controllers\ReactionController.cs" />
     <Compile Include="Controllers\ReagentController.cs" />
     <Compile Include="Controllers\Utility\ReactionUtility.cs" />
+    <Compile Include="Filters\Binders.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

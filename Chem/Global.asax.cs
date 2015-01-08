@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Chem.Controllers;
+using Chem.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +24,7 @@ namespace Chem
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.DefaultBinder = new HomeCustomDataBinder();
             AuthConfig.RegisterAuth();
         }
     }
