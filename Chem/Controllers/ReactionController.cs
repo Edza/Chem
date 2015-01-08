@@ -28,6 +28,7 @@ namespace Chem.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            db.Reagents.ToList();
             Reaction reaction = db.Reactions.Find(id);
             if (reaction == null)
             {

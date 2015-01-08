@@ -1,4 +1,5 @@
-﻿@model Chem.Models.Reaction
+﻿@using Chem.Models
+@model Chem.Models.Reaction
 
 @{
     ViewBag.Title = "Details";
@@ -16,6 +17,16 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Desc)
     </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Reagents)
+    </div>
+    <div class="display-field">
+        @{var s = Model.Reagents.Aggregate<Reagent, string>("", (tog, th) => tog + Environment.NewLine + th.Name);}
+    @(new HtmlString(s))
+
+
+
+</div>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |

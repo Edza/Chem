@@ -20,7 +20,7 @@ namespace Chem.Models
     {
         public int ID { get; set; }
         public string Desc { get; set; }
-        public List<Reagent> Reagents { get; set; }
+        virtual public List<Reagent> Reagents { get; set; }
         public UserProfile AddedBy { get; set; }
     }
 
