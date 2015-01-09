@@ -6,7 +6,8 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -22,6 +23,24 @@
             @Html.EditorFor(model => model.Desc)
             @Html.ValidationMessageFor(model => model.Desc)
         </div>
+        <div class="editor-label">
+            <label for="Reagents">Reagents</label>
+        </div>
+
+        @{
+            List<Chem.Models.Reagent> reagents;
+
+            if (Model != null)
+            {
+                reagents = Model.Reagents ?? new List<Chem.Models.Reagent>();
+            }
+            else
+            {
+                reagents = new List<Chem.Models.Reagent>();
+            }
+        }
+
+        @Html.Partial("_ReagentListControl", reagents)
 
         <p>
             <input type="submit" value="Save" />

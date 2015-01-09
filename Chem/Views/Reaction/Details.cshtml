@@ -9,7 +9,6 @@
 
 <fieldset>
     <legend>Reaction</legend>
-
     
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Desc)
@@ -22,10 +21,7 @@
     </div>
     <div class="display-field">
         @{var s = Model.Reagents.Aggregate<Reagent, string>("", (tog, th) => tog + Environment.NewLine + th.Name);}
-    @(new HtmlString(s))
-
-
-
+        @(new HtmlString(s))
 </div>
 </fieldset>
 <p>

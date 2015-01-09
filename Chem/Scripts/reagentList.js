@@ -1,5 +1,5 @@
 ﻿function downloadReagents() {
-    $.get("../reagent/list", function (data) {
+    $.get("/Reagent/List", function (data) {
         var options = $("#reagentsSelect");
         options.find('option').remove();
         $.each(data, function () {

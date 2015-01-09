@@ -350,6 +350,7 @@
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Movie\Edit.cshtml" />
     <Content Include="Views\Movie\Delete.cshtml" />
+    <Content Include="Views\Shared\_ReagentListControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
