@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Chem.Models.Reagent>
+@using Chem.Models
 
 @{
     ViewBag.Title = "Index";
+    var accessableReagents = (List<Reagent>)ViewBag.AccesableReagents;
 }
 
 <h2>Index</h2>
@@ -18,15 +20,20 @@
     </tr>
 
 @foreach (var item in Model) {
+    string s = "";
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ID). 
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) 
+            @if(accessableReagents.Exists(item2 => item2.ID == item.ID)) {
+                s = "|" + Html.ActionLink("Edit", "Edit", new { id = item.ID }).ToHtmlString() + " | " +
+                Html.ActionLink("Delete", "Delete", new { id = item.ID }).ToHtmlString();
+            }
+            @Html.Raw(s)
         </td>
     </tr>
 }

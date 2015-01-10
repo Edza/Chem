@@ -12,8 +12,8 @@ namespace Chem.Models
         public string Title { get; set; }
         public string Desc { get; set; }
         public string Url { get; set; }
-        public Reaction Reaction { get; set; }
-        public UserProfile AddedBy { get; set; }
+        virtual public Reaction Reaction { get; set; }
+        public int AddedById { get; set; }
     }
 
     public class Reaction
@@ -21,14 +21,14 @@ namespace Chem.Models
         public int ID { get; set; }
         public string Desc { get; set; }
         virtual public List<Reagent> Reagents { get; set; }
-        public UserProfile AddedBy { get; set; }
+        public int AddedById { get; set; }
     }
 
     public class Reagent
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public UserProfile AddedBy { get; set; }
+        public int AddedById { get; set; }
         public List<Reaction> Reactions { get; set; }
     }
 

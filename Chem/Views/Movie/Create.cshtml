@@ -1,4 +1,5 @@
 ﻿@model Chem.Models.Movie
+@using Chem.Models
 
 @{
     ViewBag.Title = "Create";
@@ -35,6 +36,17 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Url)
             @Html.ValidationMessageFor(model => model.Url)
+        </div>
+
+        <div class="editor-label">
+            <label for="Reagents">Reaction</label>
+        </div>
+        <div class="editor-field">
+            @{
+                List<Reaction> reactions = (List<Reaction>)ViewBag.Reactions;
+              }
+
+            @Html.DropDownList("reaction", reactions.Select(item => new SelectListItem() { Text = item.Desc, Value = item.ID.ToString() }))
         </div>
 
         <p>

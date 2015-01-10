@@ -27,7 +27,23 @@
          @Html.DisplayNameFor(model => model.Url)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Url)
+        <iframe width="560" height="315" src="//www.youtube.com/embed/@Model.Url" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Reaction.Desc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Reaction.Desc)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Reaction.Reagents)
+    </div>
+    <div class="display-field">
+        @foreach (var reagent in Model.Reaction.Reagents)
+        {
+            string s = reagent.Name + " ";
+            @s
+        }
     </div>
 </fieldset>
 <p>

@@ -17,11 +17,15 @@ namespace Chem.Filters
                 HttpRequestBase request = controllerContext.HttpContext.Request;
 
                 string desc = request.Form.Get("desc");
+                string id = "0";
 
+                if (request.Form.AllKeys.Contains("ID"))
+                    id = request.Form.Get("ID");
 
                 return new Reaction
                 {
-                    Desc = desc
+                    Desc = desc,
+                    ID = int.Parse(id)
                 };
 
                 //// call the default model binder this new binding context
@@ -33,5 +37,5 @@ namespace Chem.Filters
             }
         }
 
-    } 
+    }
 }

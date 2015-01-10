@@ -1,4 +1,12 @@
-﻿function downloadReagents() {
+﻿var isEditMode = false;
+
+function downloadReagents() {
+    if ($("#reagents").val().trim() != "") {
+        isEditMode = true;
+        $("#addReagent").hide();
+        $('#reagentsSelect').hide();
+    }
+
     $.get("/Reagent/List", function (data) {
         var options = $("#reagentsSelect");
         options.find('option').remove();
@@ -30,5 +38,7 @@ $(function () {
         downloadReagents();
         $("#reagents").val("");
         $("#reagentsDisplayNames").html("");
+        $("#addReagent").show();
+        $('#reagentsSelect').show();
     });
 });

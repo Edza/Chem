@@ -186,6 +186,7 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ReactionController.cs" />
     <Compile Include="Controllers\ReagentController.cs" />
+    <Compile Include="Controllers\Utility\Accounts.cs" />
     <Compile Include="Controllers\Utility\ReactionUtility.cs" />
     <Compile Include="Filters\Binders.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -215,6 +216,10 @@
     <Compile Include="Migrations\201501061333092_mig4.cs" />
     <Compile Include="Migrations\201501061333092_mig4.Designer.cs">
       <DependentUpon>201501061333092_mig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501101508297_userChanges.cs" />
+    <Compile Include="Migrations\201501101508297_userChanges.Designer.cs">
+      <DependentUpon>201501101508297_userChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -376,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501061333092_mig4.resx">
       <DependentUpon>201501061333092_mig4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501101508297_userChanges.resx">
+      <DependentUpon>201501101508297_userChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

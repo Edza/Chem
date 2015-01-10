@@ -6,9 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Chem.Models;
+using Chem.Filters;
+using WebMatrix.WebData;
+using Chem.Controllers.Utility;
 
 namespace Chem.Controllers
 {
+    [Authorize]
+    [InitializeSimpleMembership]
     public class MovieController : Controller
     {
         private MovieDBContext db = new MovieDBContext();
@@ -18,6 +23,14 @@ namespace Chem.Controllers
 
         public ActionResult Index()
         {
+            var accesableMovies = new List<Movie>();
+            foreach (var item in db.Movies.ToList())
+            {
+                if (item.AddedById == WebSecurity.CurrentUserId || Accounts.IsAdmin())
+                    accesableMovies.Add(item);
+            }
+            ViewBag.AccesableMovies = accesableMovies;
+
             return View(db.Movies.ToList());
         }
 
@@ -39,6 +52,7 @@ namespace Chem.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.Reactions = db.Reactions.ToList();
             return View();
         }
 
@@ -47,10 +61,13 @@ namespace Chem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Movie movie)
+        public ActionResult Create(FormCollection formCollection, Movie movie)
         {
             if (ModelState.IsValid)
             {
+                var reaction =  db.Reactions.Find(int.Parse(formCollection["reaction"].Trim()));
+                movie.Reaction = reaction;
+                movie.AddedById = WebSecurity.CurrentUserId;
                 db.Movies.Add(movie);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -69,6 +86,10 @@ namespace Chem.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.SelectedReaction = movie.Reaction.ID;
+            ViewBag.Reactions = db.Reactions.ToList();
+
             return View(movie);
         }
 
@@ -77,11 +98,19 @@ namespace Chem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Movie movie)
+        public ActionResult Edit(FormCollection formCollection, Movie movie)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(movie).State = EntityState.Modified;
+                var reaction = db.Reactions.Find(int.Parse(formCollection["reaction"].Trim()));
+                db.Reactions.Attach(reaction);
+                movie.Reaction = reaction;
+                Movie savedMovie = movie;
+
+                Movie movieToDelete = db.Movies.Find(movie.ID);
+                db.Movies.Remove(movieToDelete);
+                db.SaveChanges();
+                db.Movies.Add(savedMovie);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

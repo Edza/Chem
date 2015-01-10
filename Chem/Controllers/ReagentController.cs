@@ -6,23 +6,38 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Chem.Models;
+using Chem.Filters;
+using WebMatrix.WebData;
+using System.Web.Security;
+using Chem.Controllers.Utility;
 
 namespace Chem.Controllers
 {
+    [Authorize]
+    [InitializeSimpleMembership]
     public class ReagentController : Controller
     {
         private MovieDBContext db = new MovieDBContext();
+        private UsersContext dbUsers = new UsersContext();
 
         //
         // GET: /Reagent/
 
         public ActionResult Index()
         {
+            var accesableReagents = new List<Reagent>();
+            foreach (var item in db.Reagents.ToList())
+            {
+                if (item.AddedById == WebSecurity.CurrentUserId || Accounts.IsAdmin())
+                    accesableReagents.Add(item);
+            }
+            ViewBag.AccesableReagents = accesableReagents;
             return View(db.Reagents.ToList());
         }
 
         //
         // GET: /Reagent/List
+        [AllowAnonymous]
         public ActionResult List()
         {
             return Json(db.Reagents.ToList(), JsonRequestBehavior.AllowGet);
@@ -58,6 +73,7 @@ namespace Chem.Controllers
         {
             if (ModelState.IsValid)
             {
+                reagent.AddedById = WebSecurity.CurrentUserId;
                 db.Reagents.Add(reagent);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,4 +1,5 @@
 ﻿@model Chem.Models.Movie
+@using Chem.Models
 
 @{
     ViewBag.Title = "Edit";
@@ -38,6 +39,30 @@
             @Html.EditorFor(model => model.Url)
             @Html.ValidationMessageFor(model => model.Url)
         </div>
+        <div class="editor-label">
+            <label for="Reagents">Reaction</label>
+        </div>
+        <div class="editor-field">
+            @{
+                List<Reaction> reactions = (List<Reaction>)ViewBag.Reactions;
+                int selectedId = (int)ViewBag.SelectedReaction;
+                var items = reactions
+                .Select(item => new SelectListItem()
+                { 
+                    Text = item.Desc,
+                    Value = item.ID.ToString(),
+                    Selected = item.ID == selectedId
+                });
+                
+                string s = Html.DropDownList("reaction", items).ToHtmlString();
+                string target = " value=\""+selectedId.ToString()+"\"";
+                s = s.Replace(target, target + " selected=\"selected\""); 
+            }
+
+            @Html.Raw(s)
+        </div>
+
+
 
         <p>
             <input type="submit" value="Save" />
