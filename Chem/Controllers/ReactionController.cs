@@ -160,14 +160,21 @@ namespace Chem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Reaction reaction = db.Reactions.Find(id);
+            try
+            {
+                Reaction reaction = db.Reactions.Find(id);
 
-            int addedBy = db.Reactions.Find(reaction.ID).AddedById;
-            if (!Accounts.CanDoThis(addedBy))
-                return Redirect("/");
+                int addedBy = db.Reactions.Find(reaction.ID).AddedById;
+                if (!Accounts.CanDoThis(addedBy))
+                    return Redirect("/");
 
-            db.Reactions.Remove(reaction);
-            db.SaveChanges();
+                db.Reactions.Remove(reaction);
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
             return RedirectToAction("Index");
         }
 

@@ -134,7 +134,15 @@ namespace Chem.Controllers
                 return Redirect("/");
 
             var profile = db.UserProfiles.Find(userId);
-            Membership.DeleteUser(profile.UserName, true);
+            try
+            {
+                Membership.DeleteUser(profile.UserName, true);
+            }
+            catch
+            {
+
+            }
+            
             
             return Redirect("/");
         }
