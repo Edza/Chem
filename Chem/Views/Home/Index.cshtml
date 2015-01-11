@@ -7,31 +7,31 @@
 }
 
 @section featured {
-    <section class="featured">
+    <div class="featured">
         <div class="content-wrapper">
             <form method="get" target="_self">
-                Meklēšana pēc virsraksta:
-                <input name="title" /> <input value="Meklēt" type="submit" />
+                @Chem.Controllers.Utility.Local.GetInCurrentLang("SearchByHeading")
+                <input name="title" /> <input value=">>" type="submit" />
             </form><br />
             <form method="get" target="_self">
-                Meklēšana ar reaģentu sarakstu:
+                @Chem.Controllers.Utility.Local.GetInCurrentLang("SearchByReagents")
                 @Html.Partial("_ReagentListControl", new List<Chem.Models.Reagent>())
-                <input value="Meklēt" type="submit" />
+                <input value=">>" type="submit" />
             </form>
         </div>
-    </section>
+    </div>
 }
 
 @{
     string s = ViewBag.Query;
     if (s != "")
     {
-        <text><h2>Tika meklēts: </h2></text>
+        <text><h2>@Chem.Controllers.Utility.Local.GetInCurrentLang("SearchQuery")</h2></text>
         <h2>@s</h2>
     }
     else
     {
-        <h3>Jaunākie video:</h3>
+        <h3>@Chem.Controllers.Utility.Local.GetInCurrentLang("NewVideos")</h3>
     }
 }
 
@@ -42,10 +42,9 @@
         @foreach (Movie m in movies) { 
         <li>
             <h5>@m.Title</h5>
-            @m.Desc
-            <a href="/Movie/Details/@m.ID">Doties >></a>
+            <a href="/Movie/Details/@m.ID">@m.Desc</a>
             <div>
-                <iframe width="250" height="150" src="//www.youtube.com/embed/@m.Url" frameborder="0" allowfullscreen></iframe>
+                <iframe width="250" height="150" src="//www.youtube.com/embed/@m.Url" allowfullscreen></iframe>
             </div>
         </li>
         }

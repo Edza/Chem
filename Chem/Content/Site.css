@@ -31,8 +31,8 @@ a {
         background-color: #c7d1d6;
     }
 
-header, footer, hgroup,
-nav, section {
+header, footer,
+nav, div.featured {
     display: block;
 }
 
@@ -214,11 +214,6 @@ ul#menu {
 
     .featured .content-wrapper {
         background-color: #7ac0da;
-        background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
-        background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
         color: white;
         padding: 20px 40px 30px 40px;
     }
@@ -246,7 +241,7 @@ hgroup.title h2 {
 }
 
 /* features */
-section.feature {
+.feature {
     width: 300px;
     float: left;
     padding: 10px;
@@ -700,13 +695,13 @@ tr.pager td {
             }
 
      /* features */
-     section.feature {
+     div.feature {
         float: none;
         padding: 10px;
         width: auto;
      }
 
-        section.feature img {
+        div.feature img {
             color: #999;
             content: attr(alt);
             font-size: 1.5em;
@@ -758,11 +753,17 @@ tr.pager td {
 .imAMotherfingButton {
     border:1px solid darkgray;
     background-color:lightgray;
-    width:120px;
+    width:40px;
     padding:2px;
     margin:2px;
     display:inline-block;
+    text-align:center;
     color:black;
+    font-weight:bold;
+    font-size:17px;
+}
+.imAMotherfingButton :hover {
+    background-color:white;
 }
 
 .myBigFatSelect {

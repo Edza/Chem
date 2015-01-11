@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Chem.Controllers.Utility
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,15 +17,18 @@
                 <p class="site-title">@Html.ActionLink("chem.edza.lv", "Index", "Home")</p>
             </div>
             <div class="float-right">
-                <section id="login">
+                <div id="login">
                     @Html.Partial("_LoginPartial")
-                </section>
+                    <br/>
+                    <a href="/home/lang?isEnglish=true">ENG</a>
+                    <a href="/home/lang?isEnglish=false">LAT</a>
+                </div>
                 <nav>
                     <ul id="menu">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Reagents", "Index", "Reagent")</li>
-                        <li>@Html.ActionLink("Reactions", "Index", "Reaction")</li>
-                        <li>@Html.ActionLink("Movies", "Index", "Movie")</li>
+                        <li>@Html.ActionLink(Local.GetInCurrentLang("Home"), "Index", "Home")</li>
+                        <li>@Html.ActionLink(Local.GetInCurrentLang("Reagents"), "Index", "Reagent")</li>
+                        <li>@Html.ActionLink(Local.GetInCurrentLang("Reactions"), "Index", "Reaction")</li>
+                        <li>@Html.ActionLink(Local.GetInCurrentLang("Movies"), "Index", "Movie")</li>
                     </ul>
                 </nav>
             </div>
@@ -39,7 +43,7 @@
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                <p>&copy; @DateTime.Now.Year - Eduards Vāvere (ev13043)</p>
             </div>
         </div>
     </footer>

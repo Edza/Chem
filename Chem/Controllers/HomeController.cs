@@ -1,4 +1,5 @@
-﻿using Chem.Models;
+﻿using Chem.Controllers.Utility;
+using Chem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,14 @@ namespace Chem.Controllers
             ViewBag.Movies = movies.ToList();
 
             return View();
+        }
+
+        public ActionResult Lang(bool isEnglish)
+        {
+            Session["IsEnglish"] = isEnglish;
+            Local.SetCurrLang(isEnglish);
+
+            return Redirect("/");
         }
     }
 }

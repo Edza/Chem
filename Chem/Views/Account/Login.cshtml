@@ -4,9 +4,9 @@
     ViewBag.Title = "Log in";
 }
 
-<hgroup class="title">
+<div class="title">
     <h1>@ViewBag.Title.</h1>
-</hgroup>
+</div>
 
 <section id="loginForm">
 <h2>Use a local account to log in.</h2>
@@ -38,11 +38,6 @@
         @Html.ActionLink("Register", "Register") if you don't have an account.
     </p>
 }
-</section>
-
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 
 @section Scripts {

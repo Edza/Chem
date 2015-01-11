@@ -82,6 +82,12 @@ namespace Chem.Controllers
         public ActionResult Edit(int id = 0)
         {
             Movie movie = db.Movies.Find(id);
+
+
+            int addedBy = movie.AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             if (movie == null)
             {
                 return HttpNotFound();
@@ -102,6 +108,10 @@ namespace Chem.Controllers
         {
             if (ModelState.IsValid)
             {
+                int addedBy = db.Movies.Find(movie.ID).AddedById;
+                if (!Accounts.CanDoThis(addedBy))
+                    return Redirect("/");
+
                 var reaction = db.Reactions.Find(int.Parse(formCollection["reaction"].Trim()));
                 db.Reactions.Attach(reaction);
                 movie.Reaction = reaction;
@@ -123,6 +133,11 @@ namespace Chem.Controllers
         public ActionResult Delete(int id = 0)
         {
             Movie movie = db.Movies.Find(id);
+
+            int addedBy = movie.AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             if (movie == null)
             {
                 return HttpNotFound();
@@ -138,6 +153,11 @@ namespace Chem.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Movie movie = db.Movies.Find(id);
+
+            int addedBy = db.Movies.Find(movie.ID).AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             db.Movies.Remove(movie);
             db.SaveChanges();
             return RedirectToAction("Index");

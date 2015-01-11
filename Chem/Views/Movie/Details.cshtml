@@ -1,48 +1,24 @@
 ﻿@model Chem.Models.Movie
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Title;
 }
 
-<h2>Details</h2>
+<h2>@Model.Title</h2>
+<p>
+    @Model.Desc
+</p>
+<p>
+    Reakcija: @Model.Reaction.Desc
+</p>
+<p>
+    Reaģentu saraksts: @foreach (var reagent in Model.Reaction.Reagents)
+    {
+        string s = reagent.Name + " ";
+        @s
+    }
+</p>
 
-<fieldset>
-    <legend>Movie</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Desc)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Desc)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Url)
-    </div>
-    <div class="display-field">
-        <iframe width="560" height="315" src="//www.youtube.com/embed/@Model.Url" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Reaction.Desc)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Reaction.Desc)
-    </div>
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Reaction.Reagents)
-    </div>
-    <div class="display-field">
-        @foreach (var reagent in Model.Reaction.Reagents)
-        {
-            string s = reagent.Name + " ";
-            @s
-        }
-    </div>
-</fieldset>
+<div class="display-field">
+    <iframe width="560" height="315" src="//www.youtube.com/embed/@Model.Url" allowfullscreen></iframe>
+</div>

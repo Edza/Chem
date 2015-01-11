@@ -15,5 +15,15 @@ namespace Chem.Controllers.Utility
             else
                 return false;
         }
+
+        public static bool CanDoThis(int addedBy)
+        {
+            bool canDoThis = false;
+            if (addedBy == WebSecurity.CurrentUserId)
+                canDoThis = true;
+            else if (Accounts.IsAdmin())
+                canDoThis = true;
+            return canDoThis;
+        }
     }
 }

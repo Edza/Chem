@@ -84,6 +84,11 @@ namespace Chem.Controllers
         public ActionResult Edit(int id = 0)
         {
             Reaction reaction = db.Reactions.Find(id);
+
+            int addedBy = reaction.AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             if (reaction == null)
             {
                 return HttpNotFound();
@@ -100,6 +105,7 @@ namespace Chem.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 string reagentsRaw = formCollection["reagents"];
                 List<int> reagentIds = ParseReagentInput(reagentsRaw);
                 List<Reagent> reagents = GetReagentsByIds(reagentIds);
@@ -135,6 +141,11 @@ namespace Chem.Controllers
         public ActionResult Delete(int id = 0)
         {
             Reaction reaction = db.Reactions.Find(id);
+
+            int addedBy = reaction.AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             if (reaction == null)
             {
                 return HttpNotFound();
@@ -150,6 +161,11 @@ namespace Chem.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Reaction reaction = db.Reactions.Find(id);
+
+            int addedBy = db.Reactions.Find(reaction.ID).AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             db.Reactions.Remove(reaction);
             db.SaveChanges();
             return RedirectToAction("Index");

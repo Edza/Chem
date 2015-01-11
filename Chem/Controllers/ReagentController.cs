@@ -88,6 +88,11 @@ namespace Chem.Controllers
         public ActionResult Edit(int id = 0)
         {
             Reagent reagent = db.Reagents.Find(id);
+
+            int addedBy = reagent.AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             if (reagent == null)
             {
                 return HttpNotFound();
@@ -104,7 +109,10 @@ namespace Chem.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reagent).State = EntityState.Modified;
+                Reagent reagentById = db.Reagents.Find(reagent.ID);
+                reagentById.Name = reagent.Name;
+
+                db.Entry(reagentById).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -117,6 +125,14 @@ namespace Chem.Controllers
         public ActionResult Delete(int id = 0)
         {
             Reagent reagent = db.Reagents.Find(id);
+
+            
+
+            int addedBy = reagent.AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
+
             if (reagent == null)
             {
                 return HttpNotFound();
@@ -132,6 +148,11 @@ namespace Chem.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Reagent reagent = db.Reagents.Find(id);
+
+            int addedBy = db.Reagents.Find(reagent.ID).AddedById;
+            if (!Accounts.CanDoThis(addedBy))
+                return Redirect("/");
+
             db.Reagents.Remove(reagent);
             db.SaveChanges();
             return RedirectToAction("Index");

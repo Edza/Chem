@@ -186,6 +186,7 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ReactionController.cs" />
     <Compile Include="Controllers\ReagentController.cs" />
+    <Compile Include="Controllers\Utility\Local.cs" />
     <Compile Include="Controllers\Utility\Accounts.cs" />
     <Compile Include="Controllers\Utility\ReactionUtility.cs" />
     <Compile Include="Filters\Binders.cs" />
