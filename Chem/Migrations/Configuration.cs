@@ -27,31 +27,8 @@ namespace Chem.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.Movies.AddOrUpdate(i => i.Title,
-        new Movie
-        {
-            Title = "When Harry Met Sally",
-
-        },
-
-         new Movie
-         {
-             Title = "Ghostbusters ",
-
-         },
-
-         new Movie
-         {
-             Title = "Ghostbusters 2",
-
-         },
-
-       new Movie
-       {
-           Title = "Rio Bravo",
-
-       }
-   );
+            
+   
         }
     }
 }

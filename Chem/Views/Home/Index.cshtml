@@ -1,31 +1,53 @@
-﻿@{
+﻿@using Chem.Models;
+
+@{
+
     ViewBag.Title = "Home Page";
+    List<Movie> movies = (List<Movie>)ViewBag.Movies;
 }
+
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            Meklēšana pēc virsraksta:
-            <input/><input value="Meklēt" type="submit" /><br/>
-            Meklēšana ar reaģentu sarakstu:
-            @Html.Partial("_ReagentListControl",  new List<Chem.Models.Reagent>())
-            <input value="Meklēt" type="submit" />
+            <form method="get" target="_self">
+                Meklēšana pēc virsraksta:
+                <input name="title" /> <input value="Meklēt" type="submit" />
+            </form><br />
+            <form method="get" target="_self">
+                Meklēšana ar reaģentu sarakstu:
+                @Html.Partial("_ReagentListControl", new List<Chem.Models.Reagent>())
+                <input value="Meklēt" type="submit" />
+            </form>
         </div>
     </section>
 }
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>VIDEO 1</h5>
-        Pats video
-    </li>
 
-    <li class="one">
-        <h5>VIDEO 2</h5>
-        Pats video
-    </li>
+@{
+    string s = ViewBag.Query;
+    if (s != "")
+    {
+        <text><h2>Tika meklēts: </h2></text>
+        <h2>@s</h2>
+    }
+    else
+    {
+        <h3>Jaunākie video:</h3>
+    }
+}
 
-    <li class="one">
-        <h5>VIDEO 3</h5>
-        Pats video
-    </li>
-</ol>
+@if (movies.Count() > 0)
+{
+    
+    <ol class="round">
+        @foreach (Movie m in movies) { 
+        <li>
+            <h5>@m.Title</h5>
+            @m.Desc
+            <a href="/Movie/Details/@m.ID">Doties >></a>
+            <div>
+                <iframe width="250" height="150" src="//www.youtube.com/embed/@m.Url" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </li>
+        }
+    </ol>
+}

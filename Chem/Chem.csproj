@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201501101508297_userChanges.Designer.cs">
       <DependentUpon>201501101508297_userChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501111100210_AddDataAnnotationsMig.cs" />
+    <Compile Include="Migrations\201501111100210_AddDataAnnotationsMig.Designer.cs">
+      <DependentUpon>201501111100210_AddDataAnnotationsMig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Movie.cs" />
@@ -333,8 +337,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -384,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501101508297_userChanges.resx">
       <DependentUpon>201501101508297_userChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501111100210_AddDataAnnotationsMig.resx">
+      <DependentUpon>201501111100210_AddDataAnnotationsMig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

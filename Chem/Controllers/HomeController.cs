@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,25 +7,51 @@ using System.Web.Mvc;
 
 namespace Chem.Controllers
 {
-    public class HomeController : Controller
+    public  partial class HomeController : Controller
     {
-        public ActionResult Index()
+        private MovieDBContext db = new MovieDBContext();
+
+        public ActionResult Index(string title = null, string reagents = null)
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            IEnumerable<Movie> movies;
 
-            return View();
-        }
+            if (title != null && title.Trim() != "")
+            {
+                movies = from m in db.Movies
+                             where m.Title.Contains(title)
+                             select m;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
+                ViewBag.Query = title;
+            }
+            else if (reagents != null && reagents.Trim() != "")
+            {
+                List<int> reagentIds = ParseReagentInput(reagents);
+                List<Reagent> reagentsList = GetReagentsByIds(reagentIds);
 
-            return View();
-        }
+                List<Movie> allMovies = db.Movies.ToList();
+                List<Movie> moviesList = new List<Movie>();
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+                foreach (var movie in allMovies)
+                {
+                    if (reagentIds.All(r => movie.Reaction.Reagents.Exists(r2 => r == r2.ID)))
+                        moviesList.Add(movie);
+                }
+
+                movies = moviesList;
+                ViewBag.Query = reagentsList.Aggregate<Reagent, string>("", (tog, th) => tog + " " + th.Name);
+            }
+            else
+            {
+                movies = from m in db.Movies
+                             orderby m.ID descending
+                             select m;
+
+                movies = movies.Take(5);
+
+                ViewBag.Query = "";
+            }
+
+            ViewBag.Movies = movies.ToList();
 
             return View();
         }

@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Chem.Models.Reagent>
 @using Chem.Models
+@using Chem.Controllers.Utility
 
 @{
     ViewBag.Title = "Index";
@@ -32,7 +33,12 @@
             @if(accessableReagents.Exists(item2 => item2.ID == item.ID)) {
                 s = "|" + Html.ActionLink("Edit", "Edit", new { id = item.ID }).ToHtmlString() + " | " +
                 Html.ActionLink("Delete", "Delete", new { id = item.ID }).ToHtmlString();
+                if (Accounts.IsAdmin())
+                {
+                    s += "| <a href='/account/block/?userId=" + item.AddedById + "'>Delete User</a>";
+                }
             }
+            
             @Html.Raw(s)
         </td>
     </tr>

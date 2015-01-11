@@ -36,7 +36,7 @@ namespace Chem.Controllers
 
         //
         // GET: /Movie/Details/5
-
+        [AllowAnonymous]
         public ActionResult Details(int id = 0)
         {
             Movie movie = db.Movies.Find(id);
@@ -106,8 +106,8 @@ namespace Chem.Controllers
                 db.Reactions.Attach(reaction);
                 movie.Reaction = reaction;
                 Movie savedMovie = movie;
-
                 Movie movieToDelete = db.Movies.Find(movie.ID);
+                savedMovie.AddedById = movieToDelete.AddedById;
                 db.Movies.Remove(movieToDelete);
                 db.SaveChanges();
                 db.Movies.Add(savedMovie);

@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Chem.Filters;
 using Chem.Models;
+using Chem.Controllers.Utility;
 
 namespace Chem.Controllers
 {
@@ -17,6 +18,8 @@ namespace Chem.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        UsersContext db = new UsersContext();
+
         //
         // GET: /Account/Login
 
@@ -120,6 +123,20 @@ namespace Chem.Controllers
             }
 
             return RedirectToAction("Manage", new { Message = message });
+        }
+
+        //
+        // GET: /Account/Block
+
+        public ActionResult Block(int userId)
+        {
+            if (!Accounts.IsAdmin() || WebSecurity.CurrentUserId == userId)
+                return Redirect("/");
+
+            var profile = db.UserProfiles.Find(userId);
+            Membership.DeleteUser(profile.UserName, true);
+            
+            return Redirect("/");
         }
 
         //
